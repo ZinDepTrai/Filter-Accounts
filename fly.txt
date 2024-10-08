@@ -1,0 +1,24 @@
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+
+local function fly()
+    local bodyGyro = Instance.new("BodyGyro")
+    local bodyVelocity = Instance.new("BodyVelocity")
+
+    bodyGyro.Parent = character.HumanoidRootPart
+    bodyGyro.MaxTorque = Vector3.new(4000, 4000, 4000)
+    bodyGyro.CFrame = character.HumanoidRootPart.CFrame
+
+    bodyVelocity.Parent = character.HumanoidRootPart
+    bodyVelocity.MaxForce = Vector3.new(4000, 4000, 4000)
+    bodyVelocity.Velocity = Vector3.new(0, 0, 0)
+
+    while true do
+        wait()
+        bodyGyro.CFrame = character.HumanoidRootPart.CFrame
+        bodyVelocity.Velocity = character.HumanoidRootPart.CFrame.LookVector * 50
+        bodyVelocity.Velocity = Vector3.new(bodyVelocity.Velocity.X, 50, bodyVelocity.Velocity.Z)
+    end
+end
+
+fly()
